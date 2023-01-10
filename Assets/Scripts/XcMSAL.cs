@@ -38,7 +38,7 @@ public class XcMSAL : MonoBehaviour
     
     private string _deviceCode = "-";
     private string _frameworkversion;
-
+#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
     #region DLL Imports
     private const string UnityWindowClassName = "UnityWndClass";
 
@@ -57,6 +57,7 @@ public class XcMSAL : MonoBehaviour
     [return: MarshalAs(UnmanagedType.Bool)]
     static extern bool EnumThreadWindows(uint dwThreadId, EnumWindowsProc lpEnumFunc, IntPtr lParam);
     #endregion
+#endif
     public string AuthorityOverride { get; set; }
     public string ExtraQueryParams { get; set; }
     public string LoginHint { get; set; }
@@ -93,7 +94,11 @@ public class XcMSAL : MonoBehaviour
     }
     public static System.IntPtr GetWindowHandle()
     {
+#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
         return GetActiveWindow();
+#else
+        return System.IntPtr.Zero;
+#endif
     }
     public void CreateOrUpdatePublicClientApp(string interactiveAuthority, string applicationId)
     {
