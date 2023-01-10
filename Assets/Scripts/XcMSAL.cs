@@ -23,6 +23,7 @@ public class XcMSAL : MonoBehaviour
     private readonly List<string> scopes = new List<string>() { "User.Read" };
     private readonly string clientName = "DesktopTestApp";
     private string _deviceCode = "-";
+    private string _frameworkversion;
 
     #region DLL Imports
     private const string UnityWindowClassName = "UnityWndClass";
@@ -87,7 +88,7 @@ public class XcMSAL : MonoBehaviour
             //.WithParentActivityOrWindow(GetWindowHandle)
             //.WithParentActivityOrWindow(new WindowInteropHelper(this).Handle)
             .WithClientName(clientName);
-        //builder.WithParentActivityOrWindow(GetActiveWindow);
+        builder.WithParentActivityOrWindow(GetActiveWindow);
 
         if (!string.IsNullOrWhiteSpace(interactiveAuthority))
         {
