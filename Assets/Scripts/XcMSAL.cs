@@ -18,7 +18,8 @@ public class XcMSAL : MonoBehaviour
 
     //private readonly string clientId = "ebe2ab4d-12b3-4446-8480-5c3828d04c50";
     private readonly string clientId = "6afec070-b576-4a2f-8d95-41f317b28e06"; //DesktopTestApp
-    private readonly string redirectUrl = "https://login.microsoftonline.com/common/oauth2/nativeclient";
+    //private readonly string redirectUrl = "https://login.microsoftonline.com/common/oauth2/nativeclient";
+    private readonly string redirectUrl = "http://localhost";
     private readonly string authority = "https://login.microsoftonline.com/common";
     private readonly List<string> scopes = new List<string>() { "User.Read" };
     private readonly string clientName = "DesktopTestApp";
@@ -88,12 +89,16 @@ public class XcMSAL : MonoBehaviour
             //.WithParentActivityOrWindow(GetWindowHandle)
             //.WithParentActivityOrWindow(new WindowInteropHelper(this).Handle)
             .WithClientName(clientName);
-        builder.WithParentActivityOrWindow(GetActiveWindow);
+        //builder.WithParentActivityOrWindow(GetActiveWindow);
 
         if (!string.IsNullOrWhiteSpace(interactiveAuthority))
         {
             // Use the override authority provided
             builder = builder.WithAuthority(new Uri(interactiveAuthority), true);
+        }
+        if (!string.IsNullOrEmpty(redirectUrl))
+        {
+            builder = builder.WithRedirectUri(redirectUrl);
         }
 
         PublicClientApplication = builder.Build();
