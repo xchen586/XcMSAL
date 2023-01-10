@@ -9,6 +9,7 @@ using System.Globalization;
 using Microsoft.Identity.Client;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Runtime.InteropServices;
 
 public class XcMSAL : MonoBehaviour
 {
@@ -23,6 +24,24 @@ public class XcMSAL : MonoBehaviour
     private readonly string clientName = "DesktopTestApp";
     private string _deviceCode = "-";
 
+    #region DLL Imports
+    private const string UnityWindowClassName = "UnityWndClass";
+
+    [DllImport("kernel32.dll")]
+    static extern uint GetCurrentThreadId();
+
+    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+    static extern int GetClassName(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+
+    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+    //[System.Runtime.InteropServices.DllImport("user32.dll")]
+    static extern System.IntPtr GetActiveWindow();
+
+    public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    static extern bool EnumThreadWindows(uint dwThreadId, EnumWindowsProc lpEnumFunc, IntPtr lParam);
+    #endregion
     public string AuthorityOverride { get; set; }
     public string ExtraQueryParams { get; set; }
     public string LoginHint { get; set; }
@@ -57,11 +76,18 @@ public class XcMSAL : MonoBehaviour
             }
         }
     }
+    public static System.IntPtr GetWindowHandle()
+    {
+        return GetActiveWindow();
+    }
     public void CreateOrUpdatePublicClientApp(string interactiveAuthority, string applicationId)
     {
         var builder = PublicClientApplicationBuilder
             .Create(applicationId)
+            //.WithParentActivityOrWindow(GetWindowHandle)
+            //.WithParentActivityOrWindow(new WindowInteropHelper(this).Handle)
             .WithClientName(clientName);
+        //builder.WithParentActivityOrWindow(GetActiveWindow);
 
         if (!string.IsNullOrWhiteSpace(interactiveAuthority))
         {
@@ -160,7 +186,7 @@ public class XcMSAL : MonoBehaviour
                 scopes,
                 Prompt.SelectAccount,
                 ExtraQueryParams).ConfigureAwait(true);
-            
+
         }
         catch (Exception exc)
         {
@@ -201,7 +227,7 @@ public class XcMSAL : MonoBehaviour
             result = await PublicClientApp.AcquireTokenInteractive(scopes)
                         .WithUseEmbeddedWebView(true)
                         .ExecuteAsync();
-            
+
 
         }
     }
