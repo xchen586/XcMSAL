@@ -16,13 +16,26 @@ public class XcMSAL : MonoBehaviour
     public Text LogTextField;
     public Text DeviceCodeTextField;
 
+    //private readonly string authority = "https://login.microsoftonline.com/common";
     //private readonly string clientId = "ebe2ab4d-12b3-4446-8480-5c3828d04c50";
-    private readonly string clientId = "6afec070-b576-4a2f-8d95-41f317b28e06"; //DesktopTestApp
     //private readonly string redirectUrl = "https://login.microsoftonline.com/common/oauth2/nativeclient";
+    //private readonly List<string> scopes = new List<string>() { "User.Read" };
+
+
+    //private readonly string authority = "https://login.microsoftonline.com/common";
+    //private readonly string clientId = "6afec070-b576-4a2f-8d95-41f317b28e06"; //DesktopTestApp
+    //private readonly string clientName = "DesktopTestApp";
+    //private readonly string redirectUrl = "http://localhost";
+    //private readonly List<string> scopes = new List<string>() { "User.Read" };
+
+    private readonly string authority = "https://login.microsoftonline.com/87e92c59-3863-486a-b08d-92b00cfe7264";
+
+    private readonly string clientId = "63ef8222-2e25-4b45-a42d-242e5fdff79d"; //VFCUnity
     private readonly string redirectUrl = "http://localhost";
-    private readonly string authority = "https://login.microsoftonline.com/common";
-    private readonly List<string> scopes = new List<string>() { "User.Read" };
-    private readonly string clientName = "DesktopTestApp";
+    private readonly List<string> scopes = new List<string>() { "api://63ef8222-2e25-4b45-a42d-242e5fdff79d/access_as_user" };
+    
+    private readonly string clientName = "VFCUnity";
+    
     private string _deviceCode = "-";
     private string _frameworkversion;
 
