@@ -15,6 +15,7 @@ public class XcMSAL : MonoBehaviour
 {
     public Text LogTextField;
     public Text DeviceCodeTextField;
+    public Text TokenTextField;
 
     //private readonly string authority = "https://login.microsoftonline.com/common";
     //private readonly string clientId = "ebe2ab4d-12b3-4446-8480-5c3828d04c50";
@@ -165,6 +166,7 @@ public class XcMSAL : MonoBehaviour
 
         LogTextField = GameObject.Find("LogText").GetComponent<Text>();
         DeviceCodeTextField = GameObject.Find("DeviceCodeText").GetComponent<Text>();
+        TokenTextField = GameObject.Find("TokenText").GetComponent<Text>();
         Debug.Log("MSAL Start");
     }
 
@@ -216,6 +218,14 @@ public class XcMSAL : MonoBehaviour
         {
             CreateException(exc);
             authenticationResult = null;
+        }
+        if (authenticationResult != null)
+        {
+            string token = authenticationResult.AccessToken;
+            if (TokenTextField)
+            {
+                TokenTextField.text = token;
+            }
         }
         return authenticationResult;
     }

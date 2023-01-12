@@ -226,8 +226,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -78, y: 67}
-  m_SizeDelta: {x: 380, y: 22}
+  m_AnchoredPosition: {x: -58.730278, y: 49.157677}
+  m_SizeDelta: {x: 418.5394, y: 66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &326018346
 MonoBehaviour:
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -494,8 +494,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -80.525, y: 144.9}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -51.16, y: 172}
+  m_SizeDelta: {x: 218.7268, y: 41.0113}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &674105113
 MonoBehaviour:
@@ -511,6 +511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogTextField: {fileID: 0}
   DeviceCodeTextField: {fileID: 0}
+  TokenTextField: {fileID: 0}
 --- !u!114 &674105114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -818,8 +819,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -78, y: 34.87027}
-  m_SizeDelta: {x: 380, y: 18.2595}
+  m_AnchoredPosition: {x: -58.731, y: -12.526}
+  m_SizeDelta: {x: 418.54, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1574088202
 MonoBehaviour:
@@ -978,8 +979,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -78.00101, y: -62.96527}
-  m_SizeDelta: {x: 380, y: 155.9305}
+  m_AnchoredPosition: {x: -58.731, y: -91.63955}
+  m_SizeDelta: {x: 418.54, y: 99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1971327954
 MonoBehaviour:
@@ -1061,8 +1062,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -80.525, y: 108.8}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -51.158, y: 117}
+  m_SizeDelta: {x: 218.73, y: 37.3408}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2073267533
 MonoBehaviour:
@@ -1078,6 +1079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogTextField: {fileID: 0}
   DeviceCodeTextField: {fileID: 0}
+  TokenTextField: {fileID: 0}
 --- !u!114 &2073267534
 MonoBehaviour:
   m_ObjectHideFlags: 0
