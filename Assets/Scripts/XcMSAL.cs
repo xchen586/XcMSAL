@@ -39,6 +39,7 @@ public class XcMSAL : MonoBehaviour
     
     private string _deviceCode = "-";
     private string _frameworkversion;
+    private string _tokenString;
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
     #region DLL Imports
     private const string UnityWindowClassName = "UnityWndClass";
@@ -194,12 +195,14 @@ public class XcMSAL : MonoBehaviour
 
     public async void SilentMSALLogin()
     {
+        resetFields();
         await SilentLogin();
     }
 
     public async void InteractiveMSAKLogin()
     {
         //await InteractiveLogin();
+        resetFields();
         await DoAcquireTokenInteractive();
     }
 
@@ -221,10 +224,10 @@ public class XcMSAL : MonoBehaviour
         }
         if (authenticationResult != null)
         {
-            string token = authenticationResult.AccessToken;
+            _tokenString = authenticationResult.AccessToken;
             if (TokenTextField)
             {
-                TokenTextField.text = token;
+                TokenTextField.text = _tokenString;
             }
         }
         return authenticationResult;
@@ -363,5 +366,15 @@ public class XcMSAL : MonoBehaviour
         }
 
         Log(output);
+    }
+
+    private void resetFields()
+    {
+        LogTextField.text = String.Empty;
+        DeviceCodeTextField.text = String.Empty;
+        TokenTextField.text = String.Empty;
+
+        _deviceCode = String.Empty;
+        _tokenString = String.Empty;
     }
 }
