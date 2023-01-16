@@ -59,6 +59,12 @@ public class XcMSAL : MonoBehaviour
     [return: MarshalAs(UnmanagedType.Bool)]
     static extern bool EnumThreadWindows(uint dwThreadId, EnumWindowsProc lpEnumFunc, IntPtr lParam);
     #endregion
+
+#elif UNITY_IOS
+    [DllImport("__Internal")]
+    private static extern System.IntPtr _GetAppViewController();
+#else
+
 #endif
     public string AuthorityOverride { get; set; }
     public string ExtraQueryParams { get; set; }
@@ -98,6 +104,8 @@ public class XcMSAL : MonoBehaviour
     {
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
         return GetActiveWindow();
+#elif UNITY_IOS
+        return _GetAppViewController();
 #else
         return System.IntPtr.Zero;
 #endif
@@ -109,7 +117,9 @@ public class XcMSAL : MonoBehaviour
             //.WithParentActivityOrWindow(GetWindowHandle)
             //.WithParentActivityOrWindow(new WindowInteropHelper(this).Handle)
             .WithClientName(clientName);
-        //builder.WithParentActivityOrWindow(GetActiveWindow);
+#if UNITY_IOS
+        builder.WithParentActivityOrWindow(GetWindowHandle);
+#endif
 
         if (!string.IsNullOrWhiteSpace(interactiveAuthority))
         {

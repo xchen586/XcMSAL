@@ -226,8 +226,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -58.730278, y: 49.157677}
-  m_SizeDelta: {x: 418.5394, y: 66}
+  m_AnchoredPosition: {x: -61.389336, y: 43.83961}
+  m_SizeDelta: {x: 492.9926, y: 161.7257}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &326018346
 MonoBehaviour:
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
+  m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -494,7 +494,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -51.16, y: 172}
+  m_AnchoredPosition: {x: -51.156, y: 223}
   m_SizeDelta: {x: 218.7268, y: 41.0113}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &674105113
@@ -819,8 +819,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -58.731, y: -12.526}
-  m_SizeDelta: {x: 418.54, y: 22}
+  m_AnchoredPosition: {x: -61.388, y: -62.0114}
+  m_SizeDelta: {x: 492.99, y: 18.208}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1574088202
 MonoBehaviour:
@@ -979,8 +979,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -58.731, y: -91.63955}
-  m_SizeDelta: {x: 418.54, y: 99}
+  m_AnchoredPosition: {x: -61.388, y: -172.64758}
+  m_SizeDelta: {x: 492.99, y: 176.1123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1971327954
 MonoBehaviour:
@@ -1062,7 +1062,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -51.158, y: 117}
+  m_AnchoredPosition: {x: -51.154, y: 165}
   m_SizeDelta: {x: 218.73, y: 37.3408}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2073267533
