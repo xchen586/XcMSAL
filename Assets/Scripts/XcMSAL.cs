@@ -40,6 +40,9 @@ public class XcMSAL : MonoBehaviour
     private string _deviceCode = "-";
     private string _frameworkversion;
     private string _tokenString;
+
+    public delegate void TokenCallbackDelgate(string token, string error);
+    private TokenCallbackDelgate tokenCallbackDelegate;
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
     #region DLL Imports
     private const string UnityWindowClassName = "UnityWndClass";
@@ -62,7 +65,20 @@ public class XcMSAL : MonoBehaviour
 
 #elif UNITY_IOS
     [DllImport("__Internal")]
-    private static extern System.IntPtr _GetAppViewController();
+    public static extern System.IntPtr _GetAppViewController();
+
+    [DllImport("__Internal")]
+    public static extern bool msalAuthInteractive(string clientId, string authority, string redirect, /*string[] scopesArray, */int scopeSize, string clientName, IntPtr callback);
+
+    private bool doneIOSMsalAuth()
+    {
+        bool ret = false;
+
+        IntPtr callbackPtr = Marshal.GetFunctionPointerForDelegate(tokenCallbackDelegate);
+        ret = msalAuthInteractive(clientId, authority, redirectUrl, /*scopes.ToArray(), */scopes.Count, clientName, callbackPtr);
+
+        return ret;
+    }
 #else
 
 #endif
@@ -110,6 +126,24 @@ public class XcMSAL : MonoBehaviour
         return System.IntPtr.Zero;
 #endif
     }
+
+    public void DoneTokenCallBack(string token, string error)
+    {
+        if (token != null)
+        { 
+            _tokenString = token;
+            if (TokenTextField)
+            {
+                TokenTextField.text = _tokenString;
+            }
+        }
+        if (error != null)
+        {
+            Log(error);
+        }
+
+    }
+
     public void CreateOrUpdatePublicClientApp(string interactiveAuthority, string applicationId)
     {
         var builder = PublicClientApplicationBuilder
@@ -178,6 +212,7 @@ public class XcMSAL : MonoBehaviour
         LogTextField = GameObject.Find("LogText").GetComponent<Text>();
         DeviceCodeTextField = GameObject.Find("DeviceCodeText").GetComponent<Text>();
         TokenTextField = GameObject.Find("TokenText").GetComponent<Text>();
+        tokenCallbackDelegate = new TokenCallbackDelgate(DoneTokenCallBack);
         Debug.Log("MSAL Start");
     }
 
@@ -218,7 +253,10 @@ public class XcMSAL : MonoBehaviour
 
     private async Task<AuthenticationResult> DoAcquireTokenInteractive()
     {
-        AuthenticationResult authenticationResult;
+        AuthenticationResult authenticationResult = null;
+#if UNITY_IOS
+        doneIOSMsalAuth();
+#else
         try
         {
             authenticationResult = await AcquireTokenInteractiveAsyncXC(
@@ -240,9 +278,10 @@ public class XcMSAL : MonoBehaviour
                 TokenTextField.text = _tokenString;
             }
         }
+#endif
         return authenticationResult;
     }
-
+    
     private async Task InteractiveLogin()
     {
         IPublicClientApplication PublicClientApp = PublicClientApplicationBuilder.Create(clientId)

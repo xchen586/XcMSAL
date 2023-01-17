@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dependencies>
 	<iosPods>
-		<iosPod name="MSAL">
+		<iosPod name="MSAL" version="~> 1.1.13" bitcodeEnabled="true">
+			<sources>
+				<source>
+					https://github.com/CocoaPods/Specs
+				</source>
+			</sources>
+		</iosPod>
+		<iosPod name="MSGraphClientSDK" version="~> 1.0.0" bitcodeEnabled="true">
 			<sources>
 				<source>
 					https://github.com/CocoaPods/Specs
