@@ -20,6 +20,6 @@ extern "C"
     
     UIViewController * _GetAppViewController();
     
-    bool msalAuthInteractive(const char * clientId, const char * authority, const char * redirect, /*const char** scopesArray, */int scopeSize, const char * clientName, TokenCallBack callback);
+    bool msalAuthInteractive(const char * clientId, const char * authority, const char * redirect, const char** scopesArray, int scopeSize, const char * clientName, const char * callbackToken, const char * callbackError);
     //public static extern bool msalAuthInteractive(string clientId, string authority, string redirect, string[] scopesArray, int scopeSize, string clientName, IntPtr callback);
 }

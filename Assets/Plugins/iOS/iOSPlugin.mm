@@ -66,27 +66,33 @@ extern "C"
     }
 
     //public static extern bool msalAuthInteractive(string clientId, string authority, string redirect, string[] scopesArray, int scopeSize, string clientName, IntPtr callback);
-    bool msalAuthInteractive(const char * clientId, const char * authority, const char * redirect, /*const char** scopesArray, */int scopeSize, const char * clientName, TokenCallBack callback) {
+    bool msalAuthInteractive(const char * clientId, const char * authority, const char * redirect, const char** scopesArray, int scopeSize, const char * clientName, const char * callbackToken, const char * callbackError) {
         
         NSMutableArray<NSString *> * scopesNSArray = [[NSMutableArray alloc] init];
         NSString * apiString = @"api://63ef8222-2e25-4b45-a42d-242e5fdff79d/access_as_user";
-        [scopesNSArray addObject:apiString];
+        //[scopesNSArray addObject:apiString];
         for (int i = 0; i < scopeSize; i++) {
-            //NSString * scope = [NSString stringWithUTF8String:scopesArray[i]];
-            //[scopesNSArray addObject:scope];
+            NSString * scope = [NSString stringWithUTF8String:scopesArray[i]];
+            [scopesNSArray addObject:scope];
         }
         
         NSString * appId = [NSString stringWithUTF8String:clientId];
         NSString * authorityString = [NSString stringWithUTF8String:authority];
         NSString * redirectString = [NSString stringWithUTF8String:redirect];
         NSString * clientString = [NSString stringWithUTF8String:clientName];
+        NSString * callBackTokenString = [NSString stringWithUTF8String:callbackToken];
+        NSString * callBackErrorString = [NSString stringWithUTF8String:callbackError];
                             
         bool ret = false;
         BOOL result = [iOSPlugin msalAuthWithAppId:appId andAuthority:authorityString andScopes:scopesNSArray andRedirectUrl:redirectString andClientName:clientString withcompletionHandler:^(NSString * _Nullable accessToken, NSString * _Nullable errorMessage) {
             if (accessToken) {
-                callback(cStringCopy([accessToken UTF8String]), nullptr);
-            } else {
-                callback(nullptr, cStringCopy([errorMessage UTF8String]));
+                //callback(cStringCopy([accessToken UTF8String]), nullptr);
+                UnitySendMessage("XcMASL", [callBackTokenString UTF8String], [accessToken UTF8String]);
+            } /*else {
+                //callback(nullptr, cStringCopy([errorMessage UTF8String]));
+            }*/
+            if (errorMessage) {
+                UnitySendMessage("XcMASL", [callBackErrorString UTF8String], [errorMessage UTF8String]);
             }
         }];
         ret = result;

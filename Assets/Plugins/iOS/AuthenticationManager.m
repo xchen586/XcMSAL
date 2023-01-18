@@ -92,9 +92,12 @@
     if (self.publicClient) {
         self.publicClient = nil;
     }
-    self.publicClient = [[MSALPublicClientApplication alloc] initWithConfiguration:config error:nil];
+    NSError * publicError;
+    self.publicClient = [[MSALPublicClientApplication alloc] initWithConfiguration:config error:&publicError];
     if (!self.publicClient) {
-        ret = FALSE;
+        ret = NO;
+    } else {
+        ret = YES;
     }
 
     return ret;

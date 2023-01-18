@@ -68,14 +68,14 @@ public class XcMSAL : MonoBehaviour
     public static extern System.IntPtr _GetAppViewController();
 
     [DllImport("__Internal")]
-    public static extern bool msalAuthInteractive(string clientId, string authority, string redirect, /*string[] scopesArray, */int scopeSize, string clientName, IntPtr callback);
+    public static extern bool msalAuthInteractive(string clientId, string authority, string redirect, string[] scopesArray, int scopeSize, string clientName, string callbackToken, string callbackError);
 
     private bool doneIOSMsalAuth()
     {
         bool ret = false;
 
-        IntPtr callbackPtr = Marshal.GetFunctionPointerForDelegate(tokenCallbackDelegate);
-        ret = msalAuthInteractive(clientId, authority, redirectUrl, /*scopes.ToArray(), */scopes.Count, clientName, callbackPtr);
+        //IntPtr callbackPtr = Marshal.GetFunctionPointerForDelegate(tokenCallbackDelegate);
+        ret = msalAuthInteractive(clientId, authority, redirectUrl, scopes.ToArray(), scopes.Count, clientName, "CallbackTokenString", "CallbackErrorString");
 
         return ret;
     }
@@ -129,19 +129,28 @@ public class XcMSAL : MonoBehaviour
 
     public void DoneTokenCallBack(string token, string error)
     {
+        CallBackForTokenString(token);
+        CallbackForErrorString(error);
+    }
+
+    public void CallBackForTokenString(string token)
+    {
         if (token != null)
-        { 
+        {
             _tokenString = token;
             if (TokenTextField)
             {
                 TokenTextField.text = _tokenString;
             }
         }
+    }
+
+    public void CallbackForErrorString(string error)
+    {
         if (error != null)
         {
             Log(error);
         }
-
     }
 
     public void CreateOrUpdatePublicClientApp(string interactiveAuthority, string applicationId)
