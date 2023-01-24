@@ -33,6 +33,7 @@ public class XcMSAL : MonoBehaviour
 
     private readonly string clientId = "63ef8222-2e25-4b45-a42d-242e5fdff79d"; //VFCUnity
     private readonly string redirectUrl = "http://localhost";
+    private readonly string iOSRedirectUrl = "msauth.com.DefaultCompany.XcMSAL://auth";
     private readonly List<string> scopes = new List<string>() { "api://63ef8222-2e25-4b45-a42d-242e5fdff79d/access_as_user" };
     
     private readonly string clientName = "VFCUnity";
@@ -75,7 +76,7 @@ public class XcMSAL : MonoBehaviour
         bool ret = false;
 
         //IntPtr callbackPtr = Marshal.GetFunctionPointerForDelegate(tokenCallbackDelegate);
-        ret = msalAuthInteractive(clientId, authority, redirectUrl, scopes.ToArray(), scopes.Count, clientName, "CallbackForTokenString", "CallbackForErrorString");
+        ret = msalAuthInteractive(clientId, authority, iOSRedirectUrl, scopes.ToArray(), scopes.Count, clientName, "CallbackForTokenString", "CallbackForErrorString");
 
         return ret;
     }
@@ -129,11 +130,11 @@ public class XcMSAL : MonoBehaviour
 
     public void DoneTokenCallBack(string token, string error)
     {
-        CallBackForTokenString(token);
+        CallbackForTokenString(token);
         CallbackForErrorString(error);
     }
 
-    public void CallBackForTokenString(string token)
+    public void CallbackForTokenString(string token)
     {
         if (token != null)
         {
