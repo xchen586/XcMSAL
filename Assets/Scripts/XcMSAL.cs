@@ -75,7 +75,7 @@ public class XcMSAL : MonoBehaviour
         bool ret = false;
 
         //IntPtr callbackPtr = Marshal.GetFunctionPointerForDelegate(tokenCallbackDelegate);
-        ret = msalAuthInteractive(clientId, authority, redirectUrl, scopes.ToArray(), scopes.Count, clientName, "CallbackTokenString", "CallbackErrorString");
+        ret = msalAuthInteractive(clientId, authority, redirectUrl, scopes.ToArray(), scopes.Count, clientName, "CallbackForTokenString", "CallbackForErrorString");
 
         return ret;
     }
@@ -217,10 +217,21 @@ public class XcMSAL : MonoBehaviour
     {
         //GameObject logText = GameObject.Find("LogText");
         //GameObject deviceCode = GameObject.Find("DeviceCodeText");
+        if (!LogTextField)
+        {
+            LogTextField = GameObject.Find("LogText").GetComponent<Text>();
+        }
 
-        LogTextField = GameObject.Find("LogText").GetComponent<Text>();
-        DeviceCodeTextField = GameObject.Find("DeviceCodeText").GetComponent<Text>();
-        TokenTextField = GameObject.Find("TokenText").GetComponent<Text>();
+        if (!DeviceCodeTextField)
+        {
+            DeviceCodeTextField = GameObject.Find("DeviceCodeText").GetComponent<Text>();
+        }
+        
+        if (!TokenTextField)
+        {
+            TokenTextField = GameObject.Find("TokenText").GetComponent<Text>();
+        }
+        
         tokenCallbackDelegate = new TokenCallbackDelgate(DoneTokenCallBack);
         Debug.Log("MSAL Start");
     }

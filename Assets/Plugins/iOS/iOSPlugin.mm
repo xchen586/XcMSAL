@@ -87,12 +87,12 @@ extern "C"
         BOOL result = [iOSPlugin msalAuthWithAppId:appId andAuthority:authorityString andScopes:scopesNSArray andRedirectUrl:redirectString andClientName:clientString withcompletionHandler:^(NSString * _Nullable accessToken, NSString * _Nullable errorMessage) {
             if (accessToken) {
                 //callback(cStringCopy([accessToken UTF8String]), nullptr);
-                UnitySendMessage("XcMASL", [callBackTokenString UTF8String], [accessToken UTF8String]);
+                UnitySendMessage("XcMSAL", [callBackTokenString UTF8String], [accessToken UTF8String]);
             } /*else {
                 //callback(nullptr, cStringCopy([errorMessage UTF8String]));
             }*/
             if (errorMessage) {
-                UnitySendMessage("XcMASL", [callBackErrorString UTF8String], [errorMessage UTF8String]);
+                UnitySendMessage("XcMSAL", [callBackErrorString UTF8String], [errorMessage UTF8String]);
             }
         }];
         ret = result;
